@@ -1,21 +1,28 @@
 pipeline {
   agent any
+  environment {
+      RELEASE='20.04'
+      }
   stages {
-    stage('stage1') {
+    stage('Build') {
+      environment {
+        LOG_LEVEL='INFO'
+        }
       steps {
-        echo "this is build number ${BUILD_NUMBER} and ${DEMO}"
-         bat '''
-         
-          echo "running a shell script"
-          chmod +x test.sh
-          ./test.sh
-          
-          '''
+        echo "this is build number ${RELEASE} and ${LOG_LEVEL}"
+        
       }
     }
-
-  }
-  environment {
-    DEMO = '1'
+    stage('Test'){
+      steps{
+          echo "Testing Release ${RELEASE}"
+          writeFile file: 'test-result.txt',test: 'passed'
+          }
+          }
+}
+post {
+  success {
+    archiveArtifact 'test-results.txt'
+    }
   }
 }
