@@ -4,6 +4,7 @@ pipeline {
     stage('stage1') {
       steps {
         bat 'echo "this is ${BUILD_NUMBER} and and ${DEMO}"'
+        echo '"this is bulid ${BUILD_NUMBER} and {DEMO}'
       }
     }
 
