@@ -8,7 +8,7 @@ pipeline {
           #!C:/Program Files/Git/bin/bash.exe
           echo "running a shell script"
           chmod +x test.sh
-          .\test.sh
+          ./test.sh
           
           '''
       }
